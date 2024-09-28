@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta charset="UTF-8">
+            <title>người dùng nhiều đáp án></title>
+            <style>
+                body{
+                    background-image: url(kkk.gif);
+                    
+                }
+                .cauhoinhieudapan{
+                    color: aqua;
+                    text-align: center;
+                }
+                #save{
+                    background-color:  rgb(231, 213, 213);
+                }
+                #update{
+                    background-color:  rgb(231, 213, 213);
+                }
+                #tablecon{
+                    margin-left: 360px;
+                    width: 400px;
+                    color: rgb(231, 213, 213);
+                }
+
+            </style>
+    </head>
+
+    <body onload="render()"></body>
+
+
+<div class="cauhoinhieudapan">
+    <div class="formm">
+        <h1> câu hỏi nhiều đáp án </h1>
+        <label > question: </label>
+        <input id="question" type="text" class="form-inputt">
+        <div class="eror-mes"></div>
+    </div><br>
+
+    <div class="form-gr">
+        <label >answer:</label>
+        <input id="answer" type="text" class="form-inputt">
+        <div class="eror-mes"></div>
+    </div><br>
+
+
+    <div class="form-gr">
+        <label >answer1:</label>   
+        <input id="answer1" type="text" class="form-inputt">  
+        <div class="eror-mes"></div>
+    </div><br>
+
+
+    <div class="form-gr">
+        <label >answer2: </label>
+        <input id="answer2" type="text" class="form-inputt">
+        <div class="eror-mes"></div>
+    </div><br>
+
+
+    <div class="form-gr">
+        <label > answer3: </label>
+        <input id="answer3" type="text" class="form-inputt">
+       <div class="eror-mes"></div>
+    </div><br>
+    
+      
+
+    <div class="form-gr">
+        <input id="index" type="hidden" >
+    </div><br>
+
+    <button onclick="addnew()" id="save">add new</button>
+
+    <button onclick="chagee()"  id="update"  style="display: none;">update</button>
+    <br>
+
+    <table id="tablecon" border="1" cellspacing="10" cellpadding="10">
+        <tr>
+            <th > id</th>
+            <th >question</th>
+            <th >answer</th>
+            <th >answer1</th>
+            <th >answer2</th>
+            <th >true-answer</th>
+            <th >status</th>
+            <th >action</th>
+           
+        </tr>
+        
+    </table>
+
+
+</div>       
+
+<script>
+    function validateinput(){
+                let formmeli = document.querySelector(".formm")
+                let inputmeli = document.querySelectorAll(".form-inputt")
+                for (let i=0; i < inputmeli.length; i++){
+                    if ( inputmeli[i].value ===""){
+                        inputmeli[i].parentElement.querySelector(".eror-mes").innerText =  `banj nhaapj ddi ${inputmeli[i].id}`
+                        }else{
+                            inputmeli[i].parentElement.querySelector(".eror-mes").innertext =""
+
+                        }
+                    
+                }
+            }
+            
+            function addnew() {
+                validateinput()
+                let formmeli = document.querySelector(".formm")
+                let erormeli = formmeli.querySelectorAll('.eror-mes')
+                let arrErormeli = []
+                for (let i = 0; i < erormeli.length; i++){
+                    arrErormeli.push(erormeli[i].innertext)
+                }
+                let checkerormeli =arrErormeli.every(value => value ==="")
+                if (checkerormeli){
+                    let question = document.getElementById("question").value
+                    let answer = document.getElementById("answer").value
+                    let answer1 = document.getElementById("answer1").value
+                    let answer2 = document.getElementById("answer2").value
+                    let answer3 = document.getElementById("answer3").value
+                    let list = localStorage.getItem("list") ? JSON.parse(localStorage.getItem("list")) : []
+                    list.push({
+                        question : question,
+                        answer : answer,
+                        answer1 : answer1,
+                        answer2 : answer2,
+                        answer3 : answer3
+                    
+                    })
+                    localStorage.setItem("list", JSON.stringify(list))
+                    console.log("Ok")
+                    render()
+                    
+                }
+                }
+                function render(){
+                let liststu = localStorage.getItem("list") ? JSON.parse(localStorage.getItem("list")) : []
+                
+                let student = `<tr>
+                                <th > id</th>
+                                <th >question</th>
+                                <th >answer</th>
+                                <th >answer1</th>
+                                <th >answer2</th>
+                                <th >true-answer</th>
+                                <th >status</th>
+                                <th >action</th>
+                                                        
+                                
+                            </tr>`
+                
+                liststu.map ((value, index) => {
+                    student += `<tr>
+                                    <td>${index+1}</td>
+                                    <td>${value.question}</td>
+                                    <td>${value.answer}</td>
+                                    <td>${value.answer}</td>
+                                    <td>${value.answer}</td>
+                                    <td>${value.answer}</td>
+
+                                    <td>${value.status ? value.status : "Chưa duyệt"}</td>
+                                    
+                                    <td>
+                                        <button onclick="editcauhoi(${index})">Edit</button>
+                                        <button onclick="deletech(${index})">Delete</button>
+                                    </td>
+                                </tr>`
+
+                            
+                })
+                document.getElementById("tablecon").innerHTML = student; 
+                  
+            }
+
+            function editcauhoi(index){
+                let liststu = localStorage.getItem("list") ? JSON.parse(localStorage.getItem("list")) : []
+
+                document.getElementById("question").value = liststu[index].question
+                document.getElementById("answer").value = liststu[index].answer
+                document.getElementById("answer1").value = liststu[index].answer
+                document.getElementById("answer2").value = liststu[index].answer
+                document.getElementById("answer3").value = liststu[index].answer
+                document.getElementById("index").value = index
+
+
+                document.getElementById("save").style.display = "none"
+                document.getElementById("update").style.display = "inline-block"
+            }
+            function chagee(){
+                let liststu = localStorage.getItem("list") ? JSON.parse(localStorage.getItem("list")) : []
+               let index  = document.getElementById("index").value 
+               liststu[index] = {
+                question : document.getElementById("question").value,
+                answer : document.getElementById("answer").value,
+                answer : document.getElementById("answer1").value,
+                answer : document.getElementById("answer2").value,
+                answer : document.getElementById("answer3").value
+               }
+               localStorage.setItem("list", JSON.stringify(liststu))
+               render()
+                document.getElementById("save").style.display = "inline-block"
+                document.getElementById("update").style.display = "none"
+               }
+
+               function deletech(index) {
+                let liststu = localStorage.getItem("list") ? JSON.parse(localStorage.getItem("list")) : []
+                liststu.splice(index, 1)
+                localStorage.setItem("list", JSON.stringify(liststu))
+                render()
+            }
+
+           
+
+
+
+
+</script>            
+
+ 
+    </body>
+</html>

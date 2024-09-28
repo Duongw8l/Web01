@@ -5,8 +5,7 @@ const btn_dk = document.getElementById("btn_dk");
 btn_dk.addEventListener("click", (e) =>{
   e.preventDefault();
   if(
-      username.value === "" ||
-      password.value === ""
+      username.value === "" || password.value === ""
   ){
       alert("Vui lòng không để trống ! ")
   }

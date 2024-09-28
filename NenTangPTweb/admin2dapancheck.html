@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta charset="UTF-8">
+            <title> admin 2 đáp án </title>
+            
+    </head>
+    <style type="text/css">
+                        body{
+                    background: url(ok.jpg) no-repeat;
+                    width: 100%;
+                    background-size: cover;
+                    background-image:url(kkk.gif) ;
+                }
+                h1{
+                    border: 2px solid white;
+                    width: 30%;
+                    text-align: center;
+                    border-radius: 8px;
+                    background-color: #edbbae ;
+                }
+                .cauhoinhieudapan{
+                    backdrop-filter: blur(3px);
+                    margin: auto;
+                    border: 2px solid none;
+                    max-width: 71%;
+                    height: auto;
+                    text-align: center;
+                    border-radius: 10px;
+                    color: black;
+                    
+                }
+                .cauhoinhieudapan button{
+                    margin-bottom: 20px;
+                    margin-left: 10px;
+                    padding: 5px;
+                    width: 20%;
+
+                }
+                .cauhoinhieudapan button:hover{
+                    background-color: burlywood;
+                    color: aliceblue;
+                }
+                
+                .formm input{
+                    width: 50%;
+                    background-color: white;
+                    height: auto;
+                    padding: 5px;
+                    border: none;
+                    border-radius: 10px;
+                }
+                .formm input:hover{
+                    box-shadow: 0 0 20px rgb(59, 46, 29);
+                }
+                .form-gr input:hover{
+                    box-shadow: 0 0 20px rgb(59, 46, 29);
+                }
+                .form-gr input{
+                    width: 50%;
+                    height: auto;
+                    padding: 5px;
+                    border: none;
+                    border-radius: 10px;
+                }
+                div button {
+                    width: 20px;
+                    border-radius: 10px;
+                }
+                
+                table{
+                    background-color: #edbbae ;
+                    margin-left: 0px;
+                    border: 2px solid white;
+                    border-radius: 10px;
+                    box-shadow: 2px;
+                }
+                table th{
+                    border: 1px solid ;
+                    border-radius: 5px;
+                }
+                table td{
+                    border: 1px solid black;
+                    border-radius: 5px;
+                    height: auto;
+                }
+                table td button{
+                    width: 50px;
+                }
+                #duyet{
+                    border-radius: 5px;
+                    width: 50px;
+                    height: auto;
+                }
+                #duyet:hover{
+                    background-color: burlywood;
+                }
+                #ko_duyet{
+                    width: 100px;
+                    height: auto;
+                    border-radius: 5px;
+                }
+                #ko_duyet:hover{
+                    background-color: burlywood;
+                }
+                #edit{
+                    width: 50px;
+                    border-radius: 5px;
+                    height: auto;
+                }
+                #edit:hover{
+                    background-color: burlywood;
+                }
+                #delete{
+                    width: 80px;
+                    border-radius: 5px;
+                    height: auto;
+                }
+                #delete:hover{
+                    background-color: burlywood;
+                }
+                
+    </style>
+    <body onload="render()"></body>
+<h1> Câu hỏi nhiều đáp án </h1>
+
+<div class="cauhoinhieudapan" style="display: none;">
+<div class="formm">
+        
+        <label > question: </label>
+        <input id="question" type="text" class="form-inputt">
+        <div class="eror-mes"></div>
+    </div><br>
+
+    <div class="form-gr">
+        <label > answer:</label>
+        <input id="answer" type="text" class="form-inputt">
+        <div class="eror-mes"></div>
+    </div><br>
+
+
+    <div class="form-gr">
+        <label >answer1:</label>   
+        <input id="answer1" type="text" class="form-inputt">  
+        <div class="eror-mes"></div>
+    </div><br>
+
+
+    <div class="form-gr">
+        <label >answer2: </label>
+        <input id="answer2" type="text" class="form-inputt">
+        <div class="eror-mes"></div>
+    </div><br>
+
+
+    <div class="form-gr">
+        <label > answer3: </label>
+        <input id="answer3" type="text" class="form-inputt">
+       <div class="eror-mes"></div>
+    </div><br>
+      
+
+    <div class="form-gr">
+        <input id="index" type="hidden" >
+    </div><br>
+
+    <button onclick="addnew()" id="save">add new</button>
+
+    <button onclick="chagee()"  id="update"  style="display: none;">update</button>
+    <br>
+</div> 
+</div>
+    
+    <table id="tablecon" border="1" cellspacing="10" cellpadding="10">
+        <tr>
+            <th > id</th>
+            <th >question</th>
+            <th >answer</th>
+            <th >answer1</th>
+            <th >answer2</th>
+            <th >answer3</th>
+            <th >status</th>
+            <th >action</th>
+           
+        </tr>
+        
+    </table>
+
+
+      
+
+<script>
+    function validateinput(){
+                let formmeli = document.querySelector(".formm")
+                let inputmeli = document.querySelectorAll(".form-inputt")
+                for (let i=0; i < inputmeli.length; i++){
+                    if ( inputmeli[i].value ===""){
+                        inputmeli[i].parentElement.querySelector(".eror-mes").innerText =  `banj nhaapj ddi ${inputmeli[i].id}`
+                        }else{
+                            inputmeli[i].parentElement.querySelector(".eror-mes").innertext =""
+
+                        }
+                    
+                }
+            }
+            
+            function addnew() {
+                validateinput()
+                let formmeli = document.querySelector(".formm")
+                let erormeli = formmeli.querySelectorAll('.eror-mes')
+                let arrErormeli = []
+                for (let i = 0; i < erormeli.length; i++){
+                    arrErormeli.push(erormeli[i].innertext)
+                }
+                let checkerormeli =arrErormeli.every(value => value ==="")
+                if (checkerormeli){
+                    let question = document.getElementById("question").value
+                    let answer = document.getElementById("answer").value
+                    let answer1 = document.getElementById("answer1").value
+                    let answer2 = document.getElementById("answer2").value
+                    let answer3 = document.getElementById("answer3").value
+                    let list = localStorage.getItem("list") ? JSON.parse(localStorage.getItem("list")) : []
+                    list.push({
+                        question : question,
+                        answer : answer,
+                        answer1 : answer1,
+                        answer2 : answer2,
+                        answer3 : answer3
+                    
+                    })
+                    localStorage.setItem("list", JSON.stringify(list))
+                    console.log("Ok")
+                    render()
+                    
+                }
+                }
+                function render(){
+                let liststu = localStorage.getItem("list") ? JSON.parse(localStorage.getItem("list")) : []
+                
+                let student = `<tr>
+                                <th > Id</th>
+                                <th >Question</th>
+                                <th >Answer</th>
+                                <th >Answer1</th>
+                                <th >Answer2</th>
+                                <th >Answer3</th>
+                                <th >Atatus</th>
+                                <th >Action</th>
+                                                        
+                                
+                            </tr>`
+                
+                liststu.map ((value, index) => {
+                    student += `<tr>
+                                    <td>${index+1}</td>
+                                    <td>${value.question}</td>
+                                    <td>${value.answer}</td>
+                                    <td>${value.answer}</td>
+                                    <td>${value.answer}</td>
+                                    <td>${value.answer}</td>
+
+                                    <td>${value.status ? value.status : "Chưa duyệt"}</td>
+                                    <td>                                
+                                        <button id="duyet" onclick="duyetCauHoi(${index})">Duyệt</button>
+                                        <button id="ko_duyet" onclick="khongDuyetCauHoi(${index})">Không duyệt</button>                          
+                                    </td>
+                                    <td>
+                                        <button id="edit" onclick="editcauhoi(${index})">Edit</button>
+                                        <button id="delete" onclick="deletech(${index})">Delete</button>
+                                    </td>
+                                </tr>`
+
+                            
+                })
+                document.getElementById("tablecon").innerHTML = student; 
+                  
+            }
+
+            function editcauhoi(index){
+                let liststu = localStorage.getItem("list") ? JSON.parse(localStorage.getItem("list")) : []
+
+                document.getElementById("question").value = liststu[index].question
+                document.getElementById("answer").value = liststu[index].answer
+                document.getElementById("answer1").value = liststu[index].answer
+                document.getElementById("answer2").value = liststu[index].answer
+                document.getElementById("answer3").value = liststu[index].answer
+                document.getElementById("index").value = index
+
+
+                document.getElementById("save").style.display = "none"
+                document.getElementById("update").style.display = "inline-block"
+            }
+            function chagee(){
+                let liststu = localStorage.getItem("list") ? JSON.parse(localStorage.getItem("list")) : []
+               let index  = document.getElementById("index").value 
+               liststu[index] = {
+                question : document.getElementById("question").value,
+                answer : document.getElementById("answer").value,
+                answer : document.getElementById("answer1").value,
+                answer : document.getElementById("answer2").value,
+                answer : document.getElementById("answer3").value
+               }
+               localStorage.setItem("list", JSON.stringify(liststu))
+               render()
+                document.getElementById("save").style.display = "inline-block"
+                document.getElementById("update").style.display = "none"
+               }
+
+               function deletech(index) {
+                let liststu = localStorage.getItem("list") ? JSON.parse(localStorage.getItem("list")) : []
+                liststu.splice(index, 1)
+                localStorage.setItem("list", JSON.stringify(liststu))
+                render()
+            }
+
+            function duyetCauHoi(index) {
+                let liststu = JSON.parse(localStorage.getItem("list"));
+                liststu[index].status = "Đã duyệt";
+                localStorage.setItem("list", JSON.stringify(liststu));
+                render();
+}
+
+            function khongDuyetCauHoi(index) {
+                let liststu = JSON.parse(localStorage.getItem("list"));
+                liststu[index].status = "Chưa duyệt";
+                localStorage.setItem("list", JSON.stringify(liststu));
+                render();
+}
+
+
+
+
+</script>            
+
+
+
+            
+
+            
+                
+       
+        
+
+        
+
+        
+    </body>
+</html>

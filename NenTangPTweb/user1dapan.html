@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta charset="UTF-8">
+            <title> người dùng 1 đáp án</title>
+            <style>
+                body{
+                    background-image: url(kkk.gif);
+                    color: rgb(127, 245, 202);
+                }
+
+                #tableconted{
+                    border: 4px solid rgb(189, 54, 54);
+                }
+
+                .cau{
+                    margin-left: 30%;
+                }
+
+            </style>
+    </head>
+
+<body onload="render()">
+        
+<div class="cau">
+         <div class="form"> <!-- (1) -->
+            <label for="question"> question: </label>
+            <input id="cauhoi" type="text" class="form-input">
+            <div class="eror-messer"></div>
+        </div><br>
+        <div class="form-gr">
+            <label for="answer"> address: </label>
+            <input id="dapans" type="text" class="form-input">
+            <div class="eror-messer"></div>
+        </div><br>
+
+        <div class="form-gr">
+            <input id="indexh" type="hidden" >
+        </div><br>
+
+        <button onclick="getnew()" id="saved">add new</button>
+
+        <button onclick="chaged()"  id="updated"  style="display: none;">update</button>
+        <br>
+
+        <table id="tablecontend" border="1" cellspacing="10" cellpadding="10">
+            <tr>
+                <th> id       </th>
+                <th> question </th>
+                <th> answer   </th>
+                <th> status   </th>
+                <th> action   </th>
+               
+            </tr>
+            
+        </table>
+
+</div>
+<script>
+            function validateinput(){
+                let formelement = document.querySelector(".form") // (1)
+                let inputelement = document.querySelectorAll(".form-input")
+                for (let i=0; i < inputelement.length; i++){
+                    if ( inputelement[i].value ===""){
+                        inputelement[i].parentElement.querySelector(".eror-messer").innerText =  `không được để trống ${inputelement[i].id}`
+                        }
+                        else{
+                            inputelement[i].parentElement.querySelector(".eror-messer").innertext =""
+                        }
+                    
+                } 
+            }
+            function getnew() {
+
+
+                validateinput()
+                let formelement = document.querySelector(".form") 
+                let erorelement = formelement.querySelectorAll('.eror-messer')  
+                let arrErorelement = []
+                for (let i = 0; i < erorelement.length; i++){
+                    arrErorelement.push(erorelement[i].innertext)
+                }
+                let checkeror = arrErorelement.every(value => value ==="") // sử dụng hàm every để kiểm tra từng giá trị 1, rỗng thì bằng true
+                if (checkeror){
+                    let cauhoi = document.getElementById("cauhoi").value
+                    let dapans = document.getElementById("dapans").value
+                    let listcauhoi = localStorage.getItem("listcauhoi") ? JSON.parse(localStorage.getItem("listcauhoi")) : []
+                    listcauhoi.push({
+                        cauhoi : cauhoi,
+                        dapans : dapans
+                    })
+                    localStorage.setItem("listcauhoi", JSON.stringify(listcauhoi))
+                    render()
+                    
+                }
+                }
+
+            function render(){
+                let listcauhoii = localStorage.getItem("listcauhoi") ? JSON.parse(localStorage.getItem("listcauhoi")) : [] //thực hiện việc kiểm tra xem có dữ liệu
+                                                                                                                        //nào được lưu trữ trong localStorage dưới key "listcauhoi" không
+                console.log("ok")
+                let bangcauhoi = `<tr>
+                                <th> id     </th>
+                                <th> cauhoi </th>
+                                <th> dapans </th>
+                                <th> status </th>
+                                <th> action </th>                       
+                                </tr>`
+                
+                listcauhoii.map ((value, indexh) => { // sử dụng hàm map để duyệt qua từng phần tử, value đại diện cho các biến trong mảng, indexh đại diện cho lần lặp thứ i
+
+                    bangcauhoi += `<tr>
+                            <td> ${indexh+1}    </td>
+                            <td> ${value.cauhoi}</td>
+                            <td> ${value.dapans}</td>
+                            <td> ${value.status ? value.status : "Chưa duyệt"} </td>
+                            
+                            <td>
+                                <button onclick= "editcauhoi(${indexh})"> edit</button>
+                                <button onclick= "deletehs(${indexh})"> delete</button>
+                            </td>
+
+                    </tr>`                            
+                })
+                document.getElementById("tablecontend").innerHTML = bangcauhoi;         
+            }
+
+            function editcauhoi(indexh){
+                let listcauhoii = localStorage.getItem("listcauhoi") ? JSON.parse(localStorage.getItem("listcauhoi")) : []
+                console.log("ok") // kiểm tra khai báo thành công listcauhoi hay chưa
+                document.getElementById("cauhoi").value = listcauhoii[indexh].cauhoi // truyền dữ liệu thứ index lên trên cauhoi 
+                document.getElementById("dapans").value = listcauhoii[indexh].dapan
+                document.getElementById("indexh").value = indexh
+
+
+                document.getElementById("saved").style.display = "none"
+                document.getElementById("updated").style.display = "inline-block"
+            }
+
+            function chaged(){
+                let listcauhoii = localStorage.getItem("listcauhoi") ? JSON.parse(localStorage.getItem("listcauhoi")) : []
+               let index  = document.getElementById("indexh").value // tạo ra 1 biến index đẻ hứng cái id rồi dựa vào id đấy để cập nhập đúng cái mình cần sửa
+               listcauhoii[indexh] = { 
+                cauhoi : document.getElementById("cauhoi").value,
+                dapans : document.getElementById("dapans").value
+               }
+               localStorage.setItem("listcauhoi", JSON.stringify(listcauhoii))
+                render()
+                document.getElementById("saved").style.display = "inline-block"
+                document.getElementById("updated").style.display = "none"
+               console.log("ok")
+            }
+
+            function deletehs(indexh) {
+                let listcauhoii = localStorage.getItem("listcauhoi") ? JSON.parse(localStorage.getItem("listcauhoi")) : []
+                listcauhoii.splice(indexh, 1)
+                localStorage.setItem("listcauhoi", JSON.stringify(listcauhoii))
+                render()
+            }
+            
+ </script>   
+</div>
+
+            
+
+
+</div>
+<divid->
+
+</div>
+
+
+            
+
+            
+                
+       
+       
+    </body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta charset="UTF-8">
+            <title> admin 1 đáp án</title>
+            <style>
+                body{
+                    background-image: url(kkk.gif);
+                    color: aqua;
+                }
+            </style>
+            
+    </head>
+    <body onload="render()">
+<div class="1da" style="display: none;">
+    <div class="form">
+            <label for="question"> question: </label>
+            <input id="cauhoi" type="text" class="form-input">
+            <div class="eror-messer"></div>
+        </div><br>
+        <div class="form-gr">
+            <label for="answer"> address: </label>
+            <input id="dapans" type="text" class="form-input">
+            <div class="eror-messer"></div>
+        </div><br>
+
+        <div class="form-gr">
+            <input id="indexh" type="hidden" >
+        </div><br>
+
+        <button onclick="getnew()" id="saved">add new</button>
+
+        <button onclick="chaged()"  id="updated"  style="display: none;">update</button>
+        <br>
+</div>
+         
+
+        <table id="tablecontend" border="1" cellspacing="10" cellpadding="10">
+            <tr>
+                <th > id</th>
+                <th >question</th>
+                <th >answer</th>
+                <th  >status</th>
+                <th  >action</th>
+               
+            </tr>
+            
+        </table>
+
+
+<script>
+            
+            function getnew() {
+                validateinput()
+                let formelement = document.querySelector(".form")
+                let erorelement = formelement.querySelectorAll('.eror-messer')
+                let arrErorelement = []
+                for (let i = 0; i < erorelement.length; i++){
+                    arrErorelement.push(erorelement[i].innertext)
+                }
+                let checkeror = arrErorelement.every(value => value ==="")
+                if (checkeror){
+                    let cauhoi = document.getElementById("cauhoi").value
+                    let dapans = document.getElementById("dapans").value
+                    let listcauhoi = localStorage.getItem("listcauhoi") ? JSON.parse(localStorage.getItem("listcauhoi")) : []
+                    listcauhoi.push({
+                        cauhoi : cauhoi,
+                        dapans : dapans
+                    })
+                    localStorage.setItem("listcauhoi", JSON.stringify(listcauhoi))
+                    render()
+                    
+                }
+                }
+
+            function render(){
+                let listcauhoii = localStorage.getItem("listcauhoi") ? JSON.parse(localStorage.getItem("listcauhoi")) : []
+                console.log("ok")
+                let bangcauhoi = `<tr>
+                                <th > id</th>
+                                <th >cauhoi</th>
+                                <th >dapans</th>
+                                <th> status </th>
+                                <th >action</th>
+                                
+
+                                </tr>`
+                
+                listcauhoii.map ((value, indexh) => { 
+                    bangcauhoi += `<tr>
+                            <td>${indexh+1}</td>
+                            <td>${value.cauhoi}</td>
+                            <td>${value.dapans}</td> 
+                            <td>${value.status ? value.status : "Chưa duyệt"}</td>  
+                            <td>                                
+                                <button onclick="duyetCauHoi(${indexh})">Duyệt</button>
+                                <button onclick="khongDuyetCauHoi(${indexh})">Không duyệt</button>                     
+                                    
+                            <td>
+                                <button onclick= "editcauhoi(${indexh})" > edit</button>
+                                <button onclick= "deletehs(${indexh})"> delete</button>
+                            </td>
+               
+                            </tr>`
+                            
+                })
+                document.getElementById("tablecontend").innerHTML = bangcauhoi;   
+                
+            }
+
+            function editcauhoi(indexh){
+                let listcauhoii = localStorage.getItem("listcauhoi") ? JSON.parse(localStorage.getItem("listcauhoi")) : []
+                console.log("ok")
+                document.getElementById("cauhoi").value = listcauhoii[indexh].cauhoi
+                document.getElementById("dapans").value = listcauhoii[indexh].dapan
+                document.getElementById("indexh").value = indexh
+
+
+                document.getElementById("saved").style.display = "none"
+                document.getElementById("updated").style.display = "inline-block"
+            }
+
+            function chaged(){
+                let listcauhoii = localStorage.getItem("listcauhoi") ? JSON.parse(localStorage.getItem("listcauhoi")) : []
+               let index  = document.getElementById("indexh").value 
+               listcauhoii[indexh] = { 
+                cauhoi : document.getElementById("cauhoi").value,
+                dapans : document.getElementById("dapans").value
+               }
+               localStorage.setItem("listcauhoi", JSON.stringify(listcauhoii))
+               render()
+                document.getElementById("saved").style.display = "inline-block"
+                document.getElementById("updated").style.display = "none"
+               console.log("ok")
+            }
+
+            function deletehs(indexh) {
+                let listcauhoii = localStorage.getItem("listcauhoi") ? JSON.parse(localStorage.getItem("listcauhoi")) : []
+                listcauhoii.splice(indexh, 1)
+                localStorage.setItem("listcauhoi", JSON.stringify(listcauhoii))
+                render()
+            }
+            function duyetCauHoi(indexh) {
+                let listcauhoii = JSON.parse(localStorage.getItem("listcauhoi"));
+                listcauhoii[indexh].status = "Đã duyệt";
+                localStorage.setItem("listcauhoi", JSON.stringify(listcauhoii));
+                render();
+                console.log("ok")
+}
+
+            function khongDuyetCauHoi(index) {
+                let listcauhoii = JSON.parse(localStorage.getItem("listcauhoi"));
+                liststu[indexh].status = "Chưa duyệt";
+                localStorage.setItem("listcauhoi", JSON.stringify(listcauhoii));
+                render();
+                console.log("ok")
+}
+ </script>   
+</div>
+
+            
+
+
+</div>
+<divid->
+
+</div>
+
+
+            
+
+            
+                
+       
+       
+    </body>
+</html>

@@ -1,0 +1,156 @@
+body{
+    background: url(kkk.gif) no-repeat ;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  
+
+}
+
+.menu {
+  display: flex;
+  background-color:rgb(24, 42, 32);
+  width: 283px;
+}
+
+.menu li a {
+  color:white;
+  border:1px solid white;
+}
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.menu li {
+  position: relative;
+}
+
+.menu a {
+  display: block;
+  padding: 10px 20px;
+  color: #6d6363;
+  text-decoration: none;
+}
+
+.menu ul ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #6e6060;
+  display: none;
+}
+
+.menu ul ul ul {
+  top: 100%;
+  min-width: 200px;
+}
+
+.menu li:hover > ul {
+  display: flex;
+  flex-direction: column;
+}
+
+#home.menu li:hover a {
+  background-color: #6f6464;
+  margin-left: 20%;
+  position: relative;
+}
+
+.menu li:hover > ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu li:hover a {
+  background-color: #363636;
+}
+
+.menu li .cap2{
+    margin-left: 40%;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#anh{
+    display: flex;
+    margin-top: 05px;
+    text-align: center;
+}
+.anh1{
+    margin-left: 50px;
+}
+.anh1 a img {
+    
+    border-radius: 20px;
+    margin-right: 10px;
+    
+}
+
+.anh2  img {  
+    justify-content: center;
+    border-radius: 20px;
+    margin-left: 30px;
+    
+}
+
+.anh2:hover{
+    border-color: aquamarine;
+}
+.anh3 img{
+    margin-left: 60px;
+    border-radius: 20px
+
+}
+
+#phancuoi{
+    margin-left: 300px;
+}
+
+#phancuoi h1{
+    color: rgb(127, 41, 29);
+   margin-left: 40%;
+   margin-top: 0px;
+    
+}
+.end{
+    background-color: rgb(88, 110, 187);
+    max-width: 80%;
+    min-height: 50%;
+    width: 450px;
+    padding-top:10px ;
+    padding-bottom:10px ;
+    border-radius: 20px;
+    display: inline-block;
+    
+}
+
+.end a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+
+
+
