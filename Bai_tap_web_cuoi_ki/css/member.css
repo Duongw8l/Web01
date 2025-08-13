@@ -1,0 +1,276 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    width: 100%;
+    height: 100vh;
+    font-family: "Open Sans",sans-serif;
+}
+.header {
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(120deg, #B0E1FA, #FBF0EA);
+    display: flex;
+    justify-content: space-between;
+
+}
+.option ul{
+    display: flex;
+    margin-left: 50px;
+    list-style: none;
+}
+.option  ul  li a {
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 80px;
+    margin-left: 20px;
+    color: black;
+}
+.option ul li a:hover{
+    color: red;
+}
+.option ul li img {
+    width: 70px;
+    margin: 5px 0px;
+}
+.info {
+    display: flex;
+}
+.name {
+    line-height: 80px;
+    margin-right: 20px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.logomember {
+    display: flex;
+}
+.logomember>img {
+    width: 50px;
+    margin: 5px 30px 5px 10px;
+    padding: 10px 0px;
+    border-radius: 50%;
+}
+.logout {
+    font-weight: bold;
+    color: black;
+    
+}
+#admin-cpanel {
+    color: red;
+}
+#admin-cpanel:hover {
+    color: rgb(30, 169, 30);
+}
+
+
+.all {
+    background-color: #D5FBFF;
+}
+.thongtin {
+    margin: 40px;
+    border: 3px solid rgb(168, 168, 168);
+    width: 50%;
+    height: 80px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+    background: #B0E1FA;
+    color: #0642cd;
+}
+
+.container {
+    margin: 50px;
+}
+
+.creat {
+    position: relative;
+    width: 160px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background: rgb(4, 180, 4);
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
+.creat:hover {
+    background: rgb(3, 152, 3);
+}
+#listcreat {
+    position: absolute;
+    box-shadow: 10px 10px 20px 0 rgba(0, 0, 0, 0.5);;
+    border-radius: 10px;
+    width: 250px;
+    height: 100px;
+    cursor: pointer;
+    opacity: 0;
+}
+#listcreat > li {
+    list-style: none;
+    text-align: justify;
+    line-height: 50px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 249px;
+    height: 49px;
+    background: rgb(238, 234, 234);
+
+}
+#listcreat > li:hover {
+    background: rgb(192, 187, 187)
+}
+.creat:focus ~ #listcreat {
+    opacity: 1;
+}
+
+
+.hidecreatquestion {
+    margin: 130px 50px;
+    background-color: #FFFFFF;
+}
+.questionSingle {
+    width: 100%;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px;
+}
+.textp {
+    margin: 10px 0px;
+}
+
+form>input {
+    width: 20%;
+    height: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px 0px;
+}
+textarea {
+    padding: 5px;
+    border-radius: 5px;
+}
+.styleanswer {
+    display: flex;
+    justify-content: space-between;
+}
+.styleanswer>input {
+    width: 20%;
+    height: 20px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.single, .writing {
+    padding: 30px;
+    border: 5px solid rgb(186, 182, 182);
+    display: none;
+}
+
+
+form button,#edit_single button {
+    margin-top: 20px;
+    width: 160px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background: rgb(4, 180, 4);
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+}
+ 
+
+.danhsachcauhoi {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.danhsachcauhoi > table {
+    width: 80%;
+    text-align: center;
+    background-color: white;
+}
+.danhsachcauhoi > table > thead > tr > th{
+    height: 30px;
+    background: #ddd;
+}
+#editButton {
+    background: rgb(23, 187, 26);
+    color: white;
+    border-radius: 10px;
+    width: 60px;
+    height: 25px;
+    margin: 5px 5px;
+}
+#deleteButton {
+    background: red;
+    color: white;
+    border-radius: 10px;
+    width: 60px;
+    height: 25px;
+    margin: 5px 5px;
+}
+.phanvung {
+    height: 50px;
+}
+
+
+.footer{
+    width: 100%;
+    height: 350px;
+    background: linear-gradient(120deg, #9dcff1, #e49adb);
+    display: flex;
+    flex-direction: column;
+    color: #0642cd;
+}
+.footer a{
+    text-decoration: none;
+    color: #0642cd;
+    
+}
+.chinh{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+.logofooter{
+    display: flex;
+    align-items: center;
+}
+.logotext{
+    margin-left: 20px;
+}
+.textfooter p{
+    padding: 8px;
+}
+.faceb{
+    width: 40%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.fit{
+    width: 40%;
+}
+.ote h3{
+    font-size: 20px;
+}
+.member{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 40px;
+}
+.ota p{
+    padding: 5px;
+    margin-right: 60px;
+}
+.otu p{
+    padding: 5px;
+}

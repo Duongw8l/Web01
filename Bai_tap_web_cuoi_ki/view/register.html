@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../js/signup.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <div class="form-control">
+            <input type="text" placeholder="Username" name="username" id="username-id">
+            <span></span>
+        </div>
+
+        <div class="form-control">
+            <input type="password" placeholder="Password" name="password" id="password-id">
+            <span></span>
+        </div>
+        
+        <div class="form-control">
+            <input type="number" placeholder="Nhập 9 nếu tạo tài khoản admin" name="admin" id="admin-id">
+            <span></span>
+        </div>
+
+        <button class="submit" type="submit" onclick="signup()">Register</button>
+
+        <div class="signup-link">
+            a member ? <a href="./login.html">Login</a>
+        </div>
+    </div>
+</body>
+</html>
